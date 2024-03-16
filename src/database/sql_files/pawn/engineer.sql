@@ -1,0 +1,27 @@
+-- mean price is 100, prices are from 85 to 120.
+-- sum of stats is equal to 15 + (price-100)/5
+INSERT INTO engineer (engineer_name, color_id, price, aerodynamics, electronics, thermodynamics, mechanics, negotiation, management) VALUES 
+("Akiis"   ,1 , 100, 1, 3, 5, 1, 1, 4),
+("Betty"   ,2 , 105, 4, 5, 1, 1, 2, 3),
+("Calmio"  ,3 , 95, 2, 3, 1, 2, 2, 4),
+("Deliper" ,4 , 115, 5, 1, 3, 5, 1, 2),
+("Edelgar" ,5 , 120, 2, 4, 2, 4, 3, 3),
+("Fedal"   ,6 , 105, 1, 5, 2, 3, 3, 2),
+("Gipsy"   ,7 , 100, 1, 2, 4, 5, 1, 2),
+("Herlink" ,8 , 105, 4, 5, 1, 2, 1, 3),
+("Ildes"   ,9 , 95, 5, 2, 3, 2, 1, 1),
+("Jazy"    ,10, 90, 4, 1, 2, 3, 1, 2),
+("Kalipso" ,11, 95, 3, 3, 1, 3, 2, 2),
+("Lapstar" ,12, 85, 1, 4, 2, 1, 3, 1),
+("Mass"    ,13, 100, 3, 5, 2, 1, 3, 1),
+("Nefis"   ,14, 100, 2, 4, 1, 2, 5, 1),
+("Obel"    ,15, 105, 1, 5, 2, 4, 1, 3),
+("Panzo"   ,16, 115, 3, 4, 3, 1, 3, 3),
+("Radium"  ,17, 120, 2, 3, 5, 2, 4, 2),
+("Sally"   ,18, 90, 4, 2, 1, 1, 1, 4),
+("Talmor"  ,19, 100, 3, 1, 4, 1, 3, 3),
+("Udipe"   ,20, 105, 2, 4, 2, 4, 3, 1),
+("Vilreki" ,21, 100, 1, 2, 3, 2, 5, 2),
+("Waqo"    ,22, 95, 3, 1, 2, 4, 2, 2),
+("Yarlota" ,23, 90, 1, 4, 3, 1, 1, 3),
+("Zalem"   ,24, 85, 2, 1, 5, 1, 1, 2)
