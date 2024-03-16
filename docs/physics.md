@@ -1,0 +1,67 @@
+# Game physics
+
+
+
+## Car mouvement
+
+The mass of the car is represented by $m$ (in kg). It is the sum of the car, the fuel and the driver masses.
+
+The car position is represented by an abscisse $x$ (in meters), it represent the distance from the first crossing of the start/finish line in the race. The initial $x$ at the start of the race is a negative value.
+
+The car texture is then placed on the circuit using trajectories. A trajectory is a function $[0,1] \rightarrow \mathbb{R}^2 \times [-\pi, \pi]$ taking a reduced abscisse $(x \mod C_{\Delta})/C_{\Delta}$ where $C_\Delta$ is the length of the circuit (in meter).
+
+The car velocity is $v = \frac{dx}{dt}$ and the car acceleration is $a = \frac{dv}{dt} = \frac{d^2x}{dt^2}$.
+
+During its movement, the car undergo a fluid friction force with the air $F_f$ and a solid friction force with the ground $F_g$.
+
+### Acceleration
+
+During an acceleration, the engine energy that is transmitted to the ground by the wheels, modelized by a force $F_e$. This force depends on the engine performance and state, the weather and the tyres (type and state).
+
+### Braking
+
+During a braking, the brakes apply a negative force $-F_b$ on the car. This force depends on the weather, the tyre type and state, and the brake performance and state.
+
+### Movement equations
+
+By appliying the second law of Newton, we have the following equations:
+
+When accelerating:
+
+$$
+am = F_e - F_f - F_g
+$$
+
+When braking:
+
+$$
+am = -F_b - F_f - F_g
+$$
+
+### Fluid friction with the air
+
+The fluid friciton force with the air is defined by:
+
+$$
+F_f = f_fv
+$$
+
+where $f_f$ (kg/s) is a coefficient that depends on 3 other coefficients:
+
+$$
+f_f = f_{f,front} + f_{f, rear} - f_{f, DRS}
+$$
+
+with $f_{f,DRS} = 0$ when the car have not the DRS activated. The three composents depends on the weather and the performances of the front and rear wings
+
+### Solid friction with the ground
+
+The friction force with the ground is given by:
+
+$$
+F_g = mg\mu_C
+$$
+
+where $\mu_C$ is the friction coefficient tyre <-> ground.
+
+## Forces, coefficients and car stats
