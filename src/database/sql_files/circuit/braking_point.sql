@@ -1,0 +1,1 @@
+--INSERT INTO braking_point (circuit_id, sector_id, abscisse, velocity_ratio)

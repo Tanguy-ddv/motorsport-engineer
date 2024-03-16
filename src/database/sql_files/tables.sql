@@ -27,6 +27,29 @@ CREATE TABLE circuit ( -- one of the place where we can race.
     path_keyword TEXT NOT NULL UNIQUE -- the path to find the images and the meta-data of the circuit.
 );
 
+CREATE TABLE pit_position (
+    pit_position_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    circuit_id INTEGER NOT NULL,
+    pit_number INTEGER NOT NULL,
+    abscisse FLOAT NOT NULL,
+    x FLOAT NOT NULL,
+    y FLOAT NOT NULL,
+    alpha FLOAT NOT NULL,
+    FOREIGN KEY (circuit_id) REFERENCES circuit(circuit_id)
+);
+
+CREATE TABLE grid_position (
+    grid_position_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    circuit_id INTEGER NOT NULL,
+    grid_number INTEGER NOT NULL,
+    abscisse FLOAT NOT NULL,
+    x FLOAT NOT NULL,
+    y FLOAT NOT NULL,
+    alpha FLOAT NOT NULL,
+    FOREIGN KEY (circuit_id) REFERENCES circuit(circuit_id)
+);
+
+
 CREATE TABLE sector_type ( -- types are: drs straight, straight, finish line straight, drs finish line straight, full speed turn, braking turn.
     sector_type_id INTEGER PRIMARY KEY AUTOINCREMENT,
     sector_type_name TEXT NOT NULL, 
@@ -49,7 +72,7 @@ CREATE TABLE braking_point ( -- an abscisse where driver have to brake to pass t
     circuit_id INTEGER NOT NULL,
     sector_id INTEGER NOT NULL,
     abscisse FLOAT NOT NULL,
-    speed_ratio FLOAT NOT NULL,
+    velocity_ratio FLOAT NOT NULL,
     FOREIGN KEY (circuit_id) REFERENCES circuit(circuit_id),
     FOREIGN KEY (sector_id) REFERENCES sector(sector_id)
 );

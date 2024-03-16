@@ -1,0 +1,1 @@
+--INSERT INTO circuit (circuit_name, nb_laps, lap_length, zoom_level, temperature, humidity, wind, path_keyword) VALUES

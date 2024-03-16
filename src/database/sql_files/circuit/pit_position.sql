@@ -1,0 +1,1 @@
+-- INSERT INTO pit_position (circuit_id, pit_number, abscisse, x, y, alpha) VALUES
