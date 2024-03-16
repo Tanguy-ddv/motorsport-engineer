@@ -20,7 +20,6 @@ class DatabaseManager:
         self.__db_path = db_path
         self.__debug = debug
         self.__create_database(table_sql_path, script_path_folder)
-        
 
     def __execute_select_query(self, query: str):
         """Execute a select query on the database."""
@@ -60,41 +59,44 @@ class DatabaseManager:
 
     def __execute_sql_script(self, script_path: str):
         """Execute a script query on the database."""
-        conn = sql.connect(self.__db_path)
-        cur = conn.cursor()
-        with open(script_path, 'r', encoding='utf-8') as f:
-            script = f.read()
-        if script:
-            cur.executescript(script)
-            conn.commit()
-        conn.close()
+        try:
+            conn = sql.connect(self.__db_path)
+            cur = conn.cursor()
+            with open(script_path, 'r', encoding='utf-8') as f:
+                script = f.read()
+            if script:
+                cur.executescript(script)
+                conn.commit()
+                cur.close()
+                conn.close()
+                
+        except sql.Error as error:
+            print("An error occured while querying the database with the script located at\n",script_path,"\n",error)            
 
-    def __create_database(self, table_sql_path: str ,script_path_folder: str):
+    def __create_database(self, table_sql_path: str, script_path_folder: str):
         """
         Create the database and execute the scripts in it.
 
         table_sql_path: the path to the sql file that creates tables.
         script_path_folder: the path to the folder containing all the scripts.
         """
-        if os.path.exists(self.__db_path):
+        if os.path.isfile(self.__db_path):
             os.remove(self.__db_path)
-        
+
         conn = sql.connect(self.__db_path)
         conn.close()
 
         self.__execute_sql_script(table_sql_path)
 
-        script_file_paths = []
         for root, _, files in os.walk(script_path_folder):
             for file in files:
-                if file.endswith('.sql') and file != table_sql_path:
-                    script_file_paths.append(os.path.join(root, file))
-
-        for script_path in script_file_paths:
-            print(script_path)
-            self.__execute_sql_script(script_path)
+                complete_path = os.path.join(root, file)
+                if complete_path.endswith('.sql') and complete_path.replace('\\','/') != table_sql_path:
+                    if self.__debug:
+                        print(complete_path)
+                    self.__execute_sql_script(complete_path)
 
     def __del__(self):
         """Destroy the DatabaseManager. Delete the database"""
-        if os.path.exists(self.__db_path) and not self.__debug:
+        if os.path.isfile(self.__db_path) and not self.__debug:
             os.remove(self.__db_path)
