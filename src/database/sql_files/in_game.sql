@@ -1,0 +1,1 @@
+--- This script contains every query ever made in game to create new data: race, championships, players, preset etc.

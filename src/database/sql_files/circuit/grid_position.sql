@@ -1,0 +1,1 @@
+-- INSERT INTO grid_position (circuit_id, grid_number, abscisse, x, y, alpha) VALUES
