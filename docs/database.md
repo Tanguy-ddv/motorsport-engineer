@@ -1,0 +1,3 @@
+# Database
+
+The database is managed by the DatabaseManager. At its creation, the DatabaseManager will create a .sqlite file an execute every query to initialize the database. The DatabaseManager is then used to query this database, with "select" like queries. The "insert" like queries are also executed on the database but also saved on a separated file (src/utils/database/sql_files/in_game_queries.sql). This file is executed at the creation of the database and is used to save all the data created during the game (players, race results etc.) At the exit of the game, the DatabaseManager is deleted and the database is deleted as well.
