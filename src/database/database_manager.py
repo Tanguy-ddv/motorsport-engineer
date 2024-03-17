@@ -7,7 +7,7 @@ import os
 class DatabaseManager:
     """The Database Manager is used to adress queries to the database."""
 
-    def __init__(self, db_path: str, table_sql_path: str,  script_path_folder, debug: bool=False) -> None:
+    def __init__(self, db_path: str, table_sql_path: str, script_path_folder, in_game_script_path: str, debug: bool=False) -> None:
         """
         Initialize an instance of DatabaseManager.
         
@@ -15,11 +15,13 @@ class DatabaseManager:
         db_path: The path to the database.
         table_sql_path: the path to the sql file that creates tables.
         script_path_folder: the folder containging all the sql files to be executed.
+        in_game_script_path: The path to the sql file that stores every insert queries executed during the games.
         debug: when passed to true, the delation of the database is not done at the destruction of the instance.
         """
         self.__db_path = db_path
         self.__debug = debug
-        self.__create_database(table_sql_path, script_path_folder)
+        self.__in_game_script_path = in_game_script_path
+        self.__create_database(table_sql_path, script_path_folder, in_game_script_path)
 
     def __execute_select_query(self, query: str):
         """Execute a select query on the database."""
@@ -51,6 +53,8 @@ class DatabaseManager:
             conn = sql.connect(self.__db_path)
             cur = conn.cursor()
             cur.execute(query)
+            with open(self.__in_game_script_path, 'a', encoding='utf-8') as f:
+                f.write(";\n" + query)
             conn.commit()
             cur.close()
             conn.close()
@@ -73,7 +77,7 @@ class DatabaseManager:
         except sql.Error as error:
             print("An error occured while querying the database with the script located at\n",script_path,"\n",error)            
 
-    def __create_database(self, table_sql_path: str, script_path_folder: str):
+    def __create_database(self, table_sql_path: str, script_path_folder: str, in_game_script_path: str):
         """
         Create the database and execute the scripts in it.
 
@@ -91,12 +95,28 @@ class DatabaseManager:
         for root, _, files in os.walk(script_path_folder):
             for file in files:
                 complete_path = os.path.join(root, file)
-                if complete_path.endswith('.sql') and complete_path.replace('\\','/') != table_sql_path:
+                if complete_path.endswith('.sql') and complete_path.replace('\\','/') != table_sql_path and complete_path.replace('\\','/') != in_game_script_path:
                     if self.__debug:
                         print(complete_path)
                     self.__execute_sql_script(complete_path)
+        
+        self.__execute_sql_script(in_game_script_path)
+
 
     def __del__(self):
         """Destroy the DatabaseManager. Delete the database"""
         if os.path.isfile(self.__db_path) and not self.__debug:
             os.remove(self.__db_path)
+
+    def get_data_by_id(self, id_: int, table: str, return_id: bool = True):
+        """Get all the data of one row based on the id and the table."""
+        query = f"SELECT * FROM {table} WHERE {table}_id = {id_} LIMIT 1"
+        result, description = self.__execute_select_query(query)
+        return {key : value for key,value in zip(description, result[0]) if (key != f"{table}_id" or return_id)}
+    
+    def get_collection_joined_by_id(self, id_, table: str, join_table: str, return_id: bool = True) -> list:
+        """Get all the row of a the table 'table' having has foreign key for the table 'join_table' the id_"""
+        query = f"SELECT * FROM {table} WHERE {join_table}_id = {id_}"
+        result, description = self.__execute_select_query(query)
+        return [{key : value for key,value in zip(description, res) if (key != f"{table}_id" or return_id)} for res in result]
+    
