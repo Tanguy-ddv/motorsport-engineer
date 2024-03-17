@@ -126,8 +126,8 @@ CREATE TABLE engineer (
     electronics INTEGER NOT NULL, -- steering wheel
     thermodynamics INTEGER NOT NULL, -- brakes
     mechanics INTEGER NOT NULL, -- chassis
-    negotiation INTEGER NOT NULL, -- price of everything else are reduced by 5*(negotiation-1)
-    management INTEGER NOT NULL, -- time to evolve each part -10%*(management-1)
+    negotiation INTEGER NOT NULL, -- price of everything else are reduced
+    management INTEGER NOT NULL, -- time to evolve each part
     FOREIGN KEY (color_id) REFERENCES color(color_id)
 );
 
@@ -135,7 +135,7 @@ CREATE TABLE engineer (
 CREATE TABLE tyre_type (
     tyre_type_id INTEGER PRIMARY KEY AUTOINCREMENT,
     tyre_type_name TEXT NOT NULL UNIQUE,
-    degradation_coeff FLOAT NOT NULL,
+    degradation_coeff FLOAT NOT NULL, -- [state/s]
     clean_perfo_coeff FLOAT NOT NULL,
     perfo_drop_state FLOAT NOT NULL,
     zero_perfo_coeff FLOAT NOT NULL,
