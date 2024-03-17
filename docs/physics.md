@@ -76,3 +76,13 @@ F_e = C\pi_t\pi_e
 $$
 
 with $\pi_t$ the performance coefficient of the tyres, $\pi_e$ the performance coefficient of the engine and $C$ the maximum force an engine can provide.
+
+### The turning velocity
+
+When arriving at a braking point, the car should have the following velocity
+
+$$
+v = r\pi_C v_{max}
+$$
+
+where $r$ is the velocity ratio of the braking point, $v_{max}$ the max velocity of the car (calculated via the movement equation), and $\pi_C$ the performance coefficient of the chassis.
