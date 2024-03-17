@@ -197,7 +197,7 @@ CREATE TABLE rear_wing (
     FOREIGN KEY (ancestor2) REFERENCES rear_wing(rear_wing_id)
 );
 
-CREATE TABLE engine ( -- only 4 possibilites, unlocked with money
+CREATE TABLE engine ( -- only 7 possibilites, unlocked with money
     engine_id INTEGER PRIMARY KEY AUTOINCREMENT,
     engine_name TEXT NOT NULL,
     power INTEGER NOT NULL,
