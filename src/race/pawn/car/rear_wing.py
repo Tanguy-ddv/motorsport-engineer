@@ -16,7 +16,7 @@ class RearWing:
         self.state = 1
 
     def get_perfo_coeff(self):
-        """Get the turning ease of the car."""
+        """Get the performance coefficient of the rear wing."""
         return affine2(
             x=self.state,
             min_ = (self.perfo-2)/20 + REAR_WING_MIN_PERFO,

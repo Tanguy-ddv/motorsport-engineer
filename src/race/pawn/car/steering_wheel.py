@@ -10,7 +10,7 @@ class SteeringWheel:
     def __init__(self, id_: int, weather: Weather) -> None:
         """Create a chassis for a car."""
         data = DBManager.get_data_by_id(id_, 'steering_wheel')
-        self.perfo = (data['perfo'] + 1)*(1 - (weather.humidity-1)/10)
+        self.perfo = data['perfo']
         self.__trait = data['complexity']
         self.state = 1
         self.__updated_with_driver_traits = False # Needs to be set to true
