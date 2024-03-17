@@ -71,11 +71,10 @@ All the performance coefficients will be noted $\pi_{i}$ with $i$ the car part i
 The engine force is calculated with the following formula:
 
 $$
-F_e = C\pi_t\pi_e
-
+F_e = \pi_t\pi_eF_{e, max}
 $$
 
-with $\pi_t$ the performance coefficient of the tyres, $\pi_e$ the performance coefficient of the engine and $C$ the maximum force an engine can provide.
+with $\pi_t$ the performance coefficient of the tyres, $\pi_e$ the performance coefficient of the engine and $F_{e,max}$ the maximum force an engine can provide.
 
 ### The turning velocity
 

@@ -2,9 +2,9 @@
 
 
 # Game constants
-FPS = 30 # [Hz]
-BEST_2KM_TIME = 20 # [s/2km] The expected time to do 2km at full speed with the best specs.
-_BEST_MAX_VELOCITY = 1/BEST_2KM_TIME*2000 # [m/s] The max speed of the car with the best specs.
+FPS = 30.0 # [Hz]
+_BEST_2KM_TIME = 20.0 # [s/2km] The expected time to do 2km at full speed with the best specs.
+_BEST_MAX_VELOCITY = 1/_BEST_2KM_TIME*2000 # [m/s] The max speed of the car with the best specs.
 
 # Physics constants
 
@@ -21,11 +21,20 @@ ENGINE_MAX_PERFO = 0.95 # [perfo]
 ENGINE_DROP = 0.15 # [state]
 ENGINE_PERFO_AT_DROP = 0.85 # [perfo]
 
-ENGINE_DEGRADATION = 0.8/(BEST_2KM_TIME*20*4) # [state/s]
+ENGINE_DEGRADATION = 0.8/(_BEST_2KM_TIME*20*4) # [state/s]
 
 ### Chassis
 
 CHASSIS_MIN_PERFO = 0.2 # [state]
-CHASSIS_MAX_PERFO = 1 # [perfo]
+CHASSIS_MAX_PERFO = 1.0 # [perfo]
 CHASSIS_DROP = 0.2 # [state]
 CHASSIS_PERFO_AT_DROP = 0.6 # [perfo]
+
+### Brakes
+
+BRAKES_MIN_PERFO = 0.65 # [state]
+BRAKES_MAX_PERFO = 0.95 # [perfo]
+BRAKES_DROP = 0.98 # [state]
+BRAKES_PERFO_AT_DROP = 0.92 # [perfo]
+
+BRAKES_DEGRADATION = 1.0/750 # [state/s] The brakes last 6 brakes/lap * 42 laps * 3 s/brakes
