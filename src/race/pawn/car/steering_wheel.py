@@ -29,3 +29,7 @@ class SteeringWheel:
     def degrade(self):
         """Degrade the steering wheel state when a card is thrown."""
         self.state -= 1/20
+    
+    def repair(self):
+        """Repair the steering wheel during a pit stop."""
+        self.state = 1

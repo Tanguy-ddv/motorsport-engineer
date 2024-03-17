@@ -33,3 +33,7 @@ class FrontWing:
             sep_x = FRONT_WING_DROP,
             sep_y = FRONT_WING_PERFO_AT_DROP + (self.perfo-2)/20
         )
+    
+    def repair(self):
+        """Repair the front wing during a pit stop."""
+        self.state = 1
