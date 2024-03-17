@@ -10,8 +10,8 @@ class Brakes:
     """The Brakes objects represents the brakes of the car during a race."""
 
     def __init__(self, id_: int, weather: Weather) -> None:
-        """Create a chassis for a car."""
-        data = DBManager.get_data_by_id(id_, 'chassis')
+        """Create thr brakes for a car."""
+        data = DBManager.get_data_by_id(id_, 'brakes')
         self.perfo = (data['perfo'] + 1)*(1 - (weather.humidity-1)/10)
         self.__trait = data['hardness']
         self.state = 1
