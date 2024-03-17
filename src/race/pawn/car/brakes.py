@@ -26,7 +26,7 @@ class Brakes:
     def get_perfo_coeff(self):
         """Get the turning ease of the car."""
         if not self.__updated_with_driver_traits:
-            raise CarError("The chassis has not be updated with a driver trait yet")
+            raise CarError("The brakes has not be updated with a driver trait yet")
         return affine2(
             x=self.state,
             min_ = (self.perfo-2)/20 + BRAKES_MIN_PERFO,
