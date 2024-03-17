@@ -38,3 +38,10 @@ BRAKES_DROP = 0.98 # [state]
 BRAKES_PERFO_AT_DROP = 0.92 # [perfo]
 
 BRAKES_DEGRADATION = 1.0/750 # [state/s] The brakes last 6 brakes/lap * 42 laps * 3 s/brakes
+
+### Rear wing
+
+REAR_WING_MIN_PERFO = 0.45
+REAR_WING_MAX_PERFO = 0.95
+REAR_WING_DROP = 0.8
+REAR_WING_PERFO_AT_DROP = 0.85

@@ -85,3 +85,26 @@ v = r\pi_C v_{max}
 $$
 
 where $r$ is the velocity ratio of the braking point, $v_{max}$ the max velocity of the car (calculated via the movement equation), and $\pi_C$ the performance coefficient of the chassis.
+
+
+### The friction coefficients
+
+The friction coefficient for the front wing is:
+
+$$
+f_{f,front} = \pi_{fw}^{-1}.f_f^0/2
+$$
+
+The friction coefficient for the rear wing is:
+
+$$
+f_{f,rear} = \pi_{rw}^{-1}.f_f^0/2
+$$
+
+The DRS friction coefficient of the rear wing is
+
+$$
+f_{f,DRS} = \pi_{DRS}.f_f^0/2
+$$
+
+with $\pi_{rw}$, $\pi_{fw}$ and $\pi_{DRS}$ the performance coefficient of the rear wing, front wing and DRS, and $f_f^0$ the minimal friction coefficient.
