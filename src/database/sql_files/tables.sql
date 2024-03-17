@@ -200,7 +200,7 @@ CREATE TABLE rear_wing (
 CREATE TABLE engine ( -- only 7 possibilites, unlocked with money
     engine_id INTEGER PRIMARY KEY AUTOINCREMENT,
     engine_name TEXT NOT NULL,
-    power INTEGER NOT NULL,
+    power INTEGER NOT NULL, -- 1,2,3,4,5,6,7
     price INTEGER NOT NULL
 );
 
