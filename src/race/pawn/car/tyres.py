@@ -5,7 +5,7 @@ from typing import Literal
 from circuit.weather import Weather
 from database import DBManager
 from utils.maths import affine2
-from utils.constant import FPS
+from utils.constant import FPS, PERFO_COEFF_PUNCTURE
 
 @dataclass(init=False)
 class TyreType:
@@ -28,7 +28,7 @@ class Tyres:
         if isinstance(tyre_type, str):
             tyre_type = {'Hard':1,'Medium':2,'Soft':3}[tyre_type]
         self.type = TyreType(weather, tyre_type)
-        self.flat = False # True if the tyre is flat, when no more state or when flattened by a card.
+        self.has_puncture = False # True if the tyre is flat, when no more state or when flattened by a card.
 
     def get_perfo_coeff(self, state: float):
         """Calculate the performance coefficient of the tyre."""
@@ -38,8 +38,16 @@ class Tyres:
             max_=self.type.clean_perfo_coeff,
             sep_x=self.type.perfo_drop_state, 
             sep_y=self.type.perfo_at_drop
-        )
+        ) if not self.has_puncture else PERFO_COEFF_PUNCTURE
 
     def degrade(self, tyre_management_perfo_coeff: float):
         """Degrade the tyres."""
-        self.state -= self.type.degradation_coeff/FPS*tyre_management_perfo_coeff
+        if not self.has_puncture and self.state > 0:
+            self.state -= self.type.degradation_coeff/FPS*tyre_management_perfo_coeff
+            self.state = max(0, self.state)
+        if self.has_puncture and self.state != 0:
+            self.state = 0
+
+    def puncture(self):
+        """Puncture the tyre."""
+        self.has_puncture = True
