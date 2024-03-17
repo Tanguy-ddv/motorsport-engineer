@@ -1,7 +1,5 @@
 # Game physics
 
-
-
 ## Car mouvement
 
 The mass of the car is represented by $m$ (in kg). It is the sum of the car, the fuel and the driver masses.
@@ -65,3 +63,16 @@ $$
 where $\mu_C$ is the friction coefficient tyre <-> ground.
 
 ## Forces, coefficients and car stats
+
+All the performance coefficients will be noted $\pi_{i}$ with $i$ the car part it refers to. This coefficient depends on the performance value of the car part, the weather and the state.
+
+### The engine force
+
+The engine force is calculated with the following formula:
+
+$$
+F_e = C\pi_t\pi_e
+
+$$
+
+with $\pi_t$ the performance coefficient of the tyres, $\pi_e$ the performance coefficient of the engine and $C$ the maximum force an engine can provide.
