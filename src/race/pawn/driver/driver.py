@@ -56,7 +56,7 @@ class Driver:
             data['tyre_management']
         )
 
-        self.trait = DriverTraits(
+        self.traits = DriverTraits(
             data['under_over_steering_trait'],
             data['complexity_trait'],
             data['hardness_trait'],
