@@ -10,13 +10,6 @@ During a race, the player can use different cards to change the game. The cards 
 - Safety Car
 - Yellow flag
 - Green flag
-- Wind storm
-- Wind stop
-- Hot temperature
-- Chill temperature
-- Wet place
-- Dry place
-
 ## Player
 
 ### Positive
