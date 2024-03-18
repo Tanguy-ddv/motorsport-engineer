@@ -71,8 +71,9 @@ CREATE TABLE braking_point ( -- an abscisse where driver have to brake to pass t
     braking_point_id INTEGER PRIMARY KEY AUTOINCREMENT,
     circuit_id INTEGER NOT NULL,
     sector_id INTEGER NOT NULL,
-    abscisse FLOAT NOT NULL,
+    turning_abscisse FLOAT NOT NULL,
     velocity_ratio FLOAT NOT NULL,
+    end_of_coast_abscisse FLOAT NOT NULL,
     FOREIGN KEY (circuit_id) REFERENCES circuit(circuit_id),
     FOREIGN KEY (sector_id) REFERENCES sector(sector_id)
 );
@@ -126,8 +127,8 @@ CREATE TABLE engineer (
     electronics INTEGER NOT NULL, -- steering wheel
     thermodynamics INTEGER NOT NULL, -- brakes
     mechanics INTEGER NOT NULL, -- chassis
-    negotiation INTEGER NOT NULL, -- price of everything else are reduced by 5*(negotiation-1)
-    management INTEGER NOT NULL, -- time to evolve each part -10%*(management-1)
+    negotiation INTEGER NOT NULL, -- price of everything else are reduced
+    management INTEGER NOT NULL, -- time to evolve each part
     FOREIGN KEY (color_id) REFERENCES color(color_id)
 );
 
@@ -135,7 +136,7 @@ CREATE TABLE engineer (
 CREATE TABLE tyre_type (
     tyre_type_id INTEGER PRIMARY KEY AUTOINCREMENT,
     tyre_type_name TEXT NOT NULL UNIQUE,
-    degradation_coeff FLOAT NOT NULL,
+    degradation_coeff FLOAT NOT NULL, -- [state/s]
     clean_perfo_coeff FLOAT NOT NULL,
     perfo_drop_state FLOAT NOT NULL,
     zero_perfo_coeff FLOAT NOT NULL,
@@ -197,10 +198,10 @@ CREATE TABLE rear_wing (
     FOREIGN KEY (ancestor2) REFERENCES rear_wing(rear_wing_id)
 );
 
-CREATE TABLE engine ( -- only 4 possibilites, unlocked with money
+CREATE TABLE engine ( -- only 7 possibilites, unlocked with money
     engine_id INTEGER PRIMARY KEY AUTOINCREMENT,
     engine_name TEXT NOT NULL,
-    power INTEGER NOT NULL,
+    power INTEGER NOT NULL, -- 1,2,3,4,5,6,7
     price INTEGER NOT NULL
 );
 
