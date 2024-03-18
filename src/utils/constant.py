@@ -7,6 +7,7 @@ FPS = 30.0 # [Hz]
 _BEST_2KM_TIME = 20.0 # [s/2km] The expected time to do 2km at full speed with the best specs.
 _BEST_MAX_VELOCITY = 1/_BEST_2KM_TIME*2000 # [m/s] The max speed of the car with the best specs.
 _BEST_RACE_DURATION = _BEST_2KM_TIME*20 # [s/40km] The expected time
+_ACCELERATION_TIME_CONSTANT = 2 # [s] The time needed to reach 63% of the maximum velocity
 
 # Strategy constants
 
@@ -69,3 +70,11 @@ FUEL_CONSO_PER_SEC = {
     NEUTRAL : _BASIC_FUEL_CONSO_PER_SEC,
     DEFENSIVE : _BASIC_FUEL_CONSO_PER_SEC*0.7
 }
+
+## Movement equation phyisic constants.
+EMPTY_CAR_MASS = 730 # [kg]
+_LIGHTER_CAR_MASS = 800 # [kg]
+
+BEST_FLUID_FRICTION_COEFF = _LIGHTER_CAR_MASS/_ACCELERATION_TIME_CONSTANT/2
+BEST_ENGINE_FORCE = _BEST_MAX_VELOCITY*_LIGHTER_CAR_MASS**2/BEST_FLUID_FRICTION_COEFF
+BEST_BRAKING_FORCE = BEST_ENGINE_FORCE/2
