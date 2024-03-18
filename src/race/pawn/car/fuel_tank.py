@@ -1,7 +1,8 @@
 """The fuel tank of the car store the fuel for the race."""
 
-from utils.constant import FUEL_TANK_MAX_MASS, FUEL_CONSO_PER_SEC, FPS, OFFENSIVE, DEFENSIVE, NEUTRAL
+from utils.constant import FUEL_TANK_MAX_MASS, FUEL_CONSO_PER_SEC, FPS
 from pawn.car.error import CarError
+from typing import Literal
 
 class FuelTank:
 
@@ -10,12 +11,19 @@ class FuelTank:
             raise CarError("The fuel level of the car is too high.")
         self.mass = mass
 
-    def consume_fuel(self, strategy) -> None:
+    def consume_fuel(self, strategy: Literal['offensive','neutral','defensive']) -> None:
         """
         Consume the fuel of the car.
         
         strategy: must be OFFENSIVE, NEUTRAL or DEFENSIVE: the driver current strategy
         """
-        if not strategy in [OFFENSIVE, NEUTRAL, DEFENSIVE]:
-            raise CarError(f'Unknown strategy: {strategy}')
         self.mass -= FUEL_CONSO_PER_SEC[strategy]/FPS
+    
+    def refuel(self, refuel_amount):
+        """
+        Refuel the fuel tank.
+        
+        refuel_amount: the mass of fuel to put in the tank.
+        """
+        self.mass += refuel_amount
+        self.mass = min(self.mass, FUEL_TANK_MAX_MASS)
