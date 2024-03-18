@@ -36,6 +36,12 @@ $$
 am = -F_b - F_f - F_g
 $$
 
+After a turn, the driver will coast (i.e. neither accelerate nor brake) for a part of the turn to pass it well. During this coast, the equation is:
+
+$$
+am = - F_f - F_g
+$$
+
 ### Fluid friction with the air
 
 The fluid friciton force with the air is defined by:
