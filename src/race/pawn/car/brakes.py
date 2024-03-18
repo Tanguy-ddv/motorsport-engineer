@@ -24,15 +24,15 @@ class Brakes:
         self.perfo -= abs(self.__trait - driver_trait)/2
 
     def get_perfo_coeff(self):
-        """Get the turning ease of the car."""
+        """Get the performance coefficient of the brakes."""
         if not self.__updated_with_driver_traits:
             raise CarError("The brakes has not be updated with a driver trait yet")
         return affine2(
             x=self.state,
-            min_ = (self.perfo-2)/20 + BRAKES_MIN_PERFO,
-            max_ = (self.perfo-2)/20 + BRAKES_MAX_PERFO,
+            min_ = (self.perfo-2)/10 + BRAKES_MIN_PERFO,
+            max_ = (self.perfo-2)/10 + BRAKES_MAX_PERFO,
             sep_x = BRAKES_DROP,
-            sep_y = BRAKES_PERFO_AT_DROP + (self.perfo-2)/20
+            sep_y = BRAKES_PERFO_AT_DROP + (self.perfo-2)/10
         )
     
     def degrade(self):
