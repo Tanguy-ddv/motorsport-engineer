@@ -18,7 +18,6 @@ CREATE TABLE color ( --
 CREATE TABLE circuit ( -- one of the place where we can race.
     circuit_id INTEGER PRIMARY KEY AUTOINCREMENT,
     circuit_name TEXT NOT NULL UNIQUE, --  the name of the circuit
-    nb_laps INTEGER NOT NULL, -- the number of laps during the race.
     lap_length INTEGER NOT NULL, -- [m] The length in meter of the lap.
     zoom_level FLOAT NOT NULL, -- [] The level of zoom done when zooming on the cars
     temperature INTEGER NOT NULL, -- 1 for colder circuits, 3 for hotter circuits
@@ -60,7 +59,7 @@ CREATE TABLE sector ( -- part of a circuit, can have different types
     sector_id INTEGER PRIMARY KEY AUTOINCREMENT,
     circuit_id INTEGER NOT NULL,
     sector_type_id INTEGER NOT NULL,
-    rank INTEGER, -- the rank in the circuit. If the sector type is
+    rank INTEGER NOT NULL, -- the rank in the circuit. If the sector type is pit or grid, then the value is -1
     sector_start FLOAT NOT NULL,
     sector_end FLOAT NOT NULL,
     FOREIGN KEY (circuit_id) REFERENCES circuit(circuit_id),
@@ -90,7 +89,7 @@ CREATE TABLE trajectory (
     sector_id INTEGER NOT NULL, -- the sector of the circuit refers to
     previous_type INTEGER NOT NULL, -- the type of the trajectory linked with this trajectory, in the previous sector
     current_type INTEGER NOT NULL, -- the type of this trajectory
-    path_keypoints TEXT NOT NULL, -- the path of the key points.
+    trajectory_path TEXT NOT NULL, -- the path of the positions and orientation json file.
     FOREIGN KEY (circuit_id) REFERENCES circuit(circuit_id),
     FOREIGN KEY (sector_id) REFERENCES sector(sector_id),
     FOREIGN KEY (previous_type) REFERENCES trajectory_type(trajectory_type_id),
