@@ -11,3 +11,4 @@ class BrakingPoint:
 
     braking_abscisse: float # The abscisse at which the pawn must have a given velocity
     end_coast_abscisse: float # The abscisse at which the pawn can accelerate after the turn.
+    velocity_ratio: float # The fraction of velocity max the pawn should have at the braking abscisse.

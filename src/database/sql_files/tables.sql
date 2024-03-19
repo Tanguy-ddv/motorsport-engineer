@@ -70,9 +70,9 @@ CREATE TABLE braking_point ( -- an abscisse where driver have to brake to pass t
     braking_point_id INTEGER PRIMARY KEY AUTOINCREMENT,
     circuit_id INTEGER NOT NULL,
     sector_id INTEGER NOT NULL,
-    turning_abscisse FLOAT NOT NULL,
+    braking_abscisse FLOAT NOT NULL,
     velocity_ratio FLOAT NOT NULL,
-    end_of_coast_abscisse FLOAT NOT NULL,
+    end_coast_abscisse FLOAT NOT NULL,
     FOREIGN KEY (circuit_id) REFERENCES circuit(circuit_id),
     FOREIGN KEY (sector_id) REFERENCES sector(sector_id)
 );
