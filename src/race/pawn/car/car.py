@@ -2,14 +2,14 @@
 
 from typing import Literal
 
-from race.pawn.car.front_wing import FrontWing
-from race.pawn.car.rear_wing import RearWing
-from race.pawn.car.engine import Engine
-from race.pawn.car.chassis import Chassis
-from race.pawn.car.steering_wheel import SteeringWheel
-from race.pawn.car.brakes import Brakes
-from race.pawn.car.fuel_tank import FuelTank
-from race.pawn.car.tyres import Tyres
+from .front_wing import FrontWing
+from .rear_wing import RearWing
+from .engine import Engine
+from .chassis import Chassis
+from .steering_wheel import SteeringWheel
+from .brakes import Brakes
+from .fuel_tank import FuelTank
+from .tyres import Tyres
 from circuit.weather import Weather
 from utils.constant import BEST_ENGINE_FORCE, BEST_FLUID_FRICTION_COEFF, BEST_BRAKING_FORCE
 

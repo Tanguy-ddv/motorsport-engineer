@@ -1,10 +1,10 @@
 """The circuit class stores every data of the circuit during a race."""
 
 from database import DBManager
-from circuit.weather import Weather
-from circuit.sector import GridSector, TurnSector, StraightSector, DRSStraightSector, PitLaneSector
-from circuit.trajectory import Trajectory
-from circuit.braking_point import BrakingPoint
+from .weather import Weather
+from .sector import GridSector, TurnSector, StraightSector, DRSStraightSector, PitLaneSector
+from .trajectory import Trajectory
+from .braking_point import BrakingPoint
 
 class Circuit:
     """The circuit class stores every data of the circuit during a race."""

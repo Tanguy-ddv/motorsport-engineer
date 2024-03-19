@@ -2,7 +2,7 @@
 
 from utils.constant import DRS_STRAIGHT, STRAIGHT, TURN, PIT_LANE, GRID, DISTANCE_DETECTION_START_DRS
 from database import DBManager
-from circuit.trajectory import Trajectory
+from .trajectory import Trajectory
 
 class Sector:
     """Abstract layer to represent every sector."""

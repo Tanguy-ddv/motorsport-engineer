@@ -1,1 +1,2 @@
-from circuit.circuit import Circuit
+from .circuit import Circuit
+__all__ = ['Circuit']
