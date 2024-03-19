@@ -57,7 +57,7 @@ class Circuit:
         
         self.braking_points = [
             BrakingPoint(
-                data_braking_point['turning_abscisse'], 
+                data_braking_point['braking_abscisse'], 
                 data_braking_point['end_coast_abscisse'],
                 data_braking_point['velocity_ratio'])
             for data_braking_point in DBManager.get_collection_joined_by_id(id_, 'braking_point', 'circuit')]
