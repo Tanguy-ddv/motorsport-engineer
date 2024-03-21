@@ -1,10 +1,11 @@
+"""A dynamic frame is a frame where objects can be rotated, changed transparancy, and which window can be zoomed on. """
+
 
 from pygame import Surface
 import pygame.transform as tf
 import pygame.image as im
 from .frame import Frame
 from pygame.font import Font
-
 
 def _zoom_image(image: Surface, zoom_level) -> Surface:
     """Rescale the image by zooming."""
@@ -99,7 +100,6 @@ class DynamicFrame(Frame):
         rect = image.get_rect()
         blit_x, blit_y = position[0] - rect.width//2, position[1] - rect.height//2
         if zoom:
-            self.window.blit(image,(blit_x,blit_y))
-        else:
             self.zoom_window.blit(image,(blit_x,blit_y))
-        
+        else:
+            self.window.blit(image,(blit_x,blit_y))

@@ -5,7 +5,6 @@ from .frame import Frame, DynamicFrame
 from pygame import Rect
 from pygame.font import Font
 
-
 class Screen:
     """The screen is used to display the game content."""
 
@@ -55,12 +54,16 @@ class Screen:
             frame.write(text, position, antialias, color, zoom)
         else:
             frame.write(text, position, antialias, color)
+    
+    def load_image_on_frame(self, frame_name, image_name, path):
+        """Load an image on the frame."""
+        self.__frames[frame_name].load_image(image_name, path)
 
-    def blit_on_frame(self, frame_name, image_name, position, orientation: float = None, alpha: float = None, zoom: bool = False):
+    def blit_on_frame(self, frame_name, image_name, position, orientation: float = 0, alpha: int = 255, zoom: bool = False, zoom_image = False):
         """Blit on image of a frame on the frame."""
         frame = self.__frames[frame_name]
         if isinstance(frame, DynamicFrame):
-            frame.blit(image_name, position, orientation, alpha, zoom)
+            frame.blit(image_name, position, orientation, alpha, zoom, zoom_image)
         else:
             frame.blit(image_name, position)
     
