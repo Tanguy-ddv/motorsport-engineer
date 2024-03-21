@@ -61,7 +61,7 @@ class DynamicFrame(Frame):
         alpha: The alpha component of the image to make transparent.
         zoom: bool. If true, the image is bilt on the zoom window, else on the normal window.
         zoom_image: If true, the image bilt on the zoom background is the zoom image, else it is the normal one.
-        use zoom_image = False when the image loaded is made only to be plotted on the zoom image, and the size corresponds.
+        use zoom_image = False when the image loaded is made only to be plotted on the zoom image, and the size matches.
         """
         if zoom:
             position = position[0]*self._zoom_level, position[1]*self._zoom_level
