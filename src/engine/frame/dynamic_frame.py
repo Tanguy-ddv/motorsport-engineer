@@ -21,7 +21,7 @@ class DynamicFrame(Frame):
         brackground_path: The path to the background image.
         font: the pygame.font.Font object to display text. If set to None, no text can be displayed on this frame.
         zoom_level: a float representing the level of zoom.
-
+        zoom_background_path: if the zoom image already exist in the assets folder, you can load it instead of resizing the small one.
         """
         super().__init__(background_path, font)
         # There is two versions of the window, the zoomed one and the normal.
