@@ -161,3 +161,4 @@ cython_debug/
 
 src/test.py
 src/db.sqlite
+assets/images/background.png

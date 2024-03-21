@@ -11,6 +11,7 @@ class Screen:
 
     def __init__(self, width, height, caption) -> None:
         self.__window = ds.set_mode((width, height))
+        self.__dimensions = (width, height)
         ds.set_caption(caption)
         #self.toggle_fullscreen()
         self.__frames: dict[str, Frame | DynamicFrame] = {}
@@ -39,7 +40,7 @@ class Screen:
         """Clean the window"""
         self.__window.fill((255,255,255))
 
-    def blit_background_on_frame(self, frame_name, zoom):
+    def blit_background_on_frame(self, frame_name, zoom = False):
         """Blit the background of the image."""
         frame = self.__frames[frame_name]
         if isinstance(frame, DynamicFrame):
@@ -47,10 +48,13 @@ class Screen:
         else:
             frame.blit_background()
         
-    def write_on_frame(self, frame_name: str, text:str, position: tuple[int, int], antialias: bool, color: tuple[int,int,int]):
+    def write_on_frame(self, frame_name: str, text:str, position: tuple[int, int], antialias: bool, color: tuple[int,int,int], zoom):
         """Write something on a frame"""
         frame = self.__frames[frame_name]
-        frame.write(text, position, antialias, color)
+        if isinstance(frame, DynamicFrame):
+            frame.write(text, position, antialias, color, zoom)
+        else:
+            frame.write(text, position, antialias, color)
 
     def blit_on_frame(self, frame_name, image_name, position, orientation: float = None, alpha: float = None, zoom: bool = False):
         """Blit on image of a frame on the frame."""
@@ -74,8 +78,20 @@ class Screen:
         else:
             focus_x, focus_y = focus
             frame = self.__frames[name]
-            width, height = frame.get_size()
-            left, top = focus_x - width//2, focus_y - height//2
-            image = frame.zoom_window.subsurface(Rect(left, top, width, height))
+            zoom_level = frame.get_zoom_level()
+            focus_x, focus_y = focus_x*zoom_level, focus_y*zoom_level
+            frame_width, frame_height = frame.get_size(False)
+            background_width, background_height = frame.get_size(True)
+            window_left = focus_x - frame_width//2
+            window_top = focus_y - frame_height//2
+            if window_left < 0:
+                window_left = 0
+            if window_top < 0:
+                window_top = 0
+            if window_left > background_width - frame_width:
+                window_left = background_width - frame_width
+            if window_top > background_height - frame_height:
+                window_top = background_height - frame_height
+            image = frame.zoom_window.subsurface(Rect(window_left, window_top, frame_width, frame_height))
             self.__window.blit(image, (left, top))
     

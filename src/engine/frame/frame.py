@@ -29,7 +29,7 @@ class Frame:
         """Write something on the screen."""
         if self._font is None:
             raise TypeError("This frame don't have any font.")
-        text_image = self._font.render(text, antialias, color=color)
+        text_image = self._font.render(text, antialias, color)
         rect = text_image.get_rect()
         blit_x, blit_y = position[0] - rect.width//2, position[1] - rect.height//2
         self.window.blit(text_image,(blit_x,blit_y))

@@ -6,7 +6,7 @@ from .frame import Frame
 from pygame.font import Font
 
 
-def __zoom_image(image: Surface, zoom_level) -> Surface:
+def _zoom_image(image: Surface, zoom_level) -> Surface:
     """Rescale the image by zooming."""
     w, h = image.get_size()
     return tf.scale(image, (w*zoom_level, h*zoom_level))
@@ -28,9 +28,35 @@ class DynamicFrame(Frame):
         self._zoom_level = zoom_level
         if zoom_background_path is not None:
             self._zoom_background = im.load(zoom_background_path) # In case the image with a better resolution already exists.
-        self._zoom_background = __zoom_image(self._background, zoom_level)
+        self._zoom_background = _zoom_image(self._background, zoom_level)
         self.zoom_window = Surface(self._zoom_background.get_size())
     
+    def get_zoom_level(self):
+        return self._zoom_level
+
+    def get_size(self, zoom: bool = False):
+        """
+        return the size of the background.
+        
+        if zoom = True, return the size of the zoom background, i.e size()*zoom_level
+        """
+        if zoom:
+            return self._zoom_background.get_size()
+        else:
+            return self._background.get_size()
+    
+    def write(self, text: str, position: tuple[int, int], antialias: bool, color: tuple[int, int, int], zoom: bool = False):
+        """Write something on the screen."""
+        if not zoom:
+            super().write(text, position, antialias, color)
+        else:
+            if self._font is None:
+                raise TypeError("This frame don't have any font.")
+            text_image = self._font.render(text, antialias, color)
+            rect = text_image.get_rect()
+            blit_x, blit_y = position[0]*self._zoom_level - rect.width//2, position[1]*self._zoom_level - rect.height//2
+            self.zoom_window.blit(text_image, (blit_x,blit_y))
+
     def blit_background(self, zoom: bool):
         """Bilt the background on the window."""
         if zoom:
@@ -41,7 +67,7 @@ class DynamicFrame(Frame):
     def load_image(self, image_name, path):
         """Load an image"""
         super().load_image(image_name, path)
-        self._images[image_name + 'zoom'] = __zoom_image(self._images[image_name], self._zoom_level)
+        self._images[image_name + 'zoom'] = _zoom_image(self._images[image_name], self._zoom_level)
     
     def blit(
             self,
