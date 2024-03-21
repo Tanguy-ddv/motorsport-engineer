@@ -17,7 +17,7 @@ class DynamicFrame(Frame):
         self._zoom_background = __zoom_image(self._background, zoom_level)
         self.zoom_window = Surface(self._zoom_background.get_size())
     
-    def bilt_background(self, zoom: bool):
+    def blit_background(self, zoom: bool):
         """Bilt the background on the window."""
         if zoom:
             self.zoom_window.blit(self._zoom_background, (0,0))
@@ -29,13 +29,13 @@ class DynamicFrame(Frame):
         super().load_image(image_name, path)
         self._images[image_name + 'zoom'] = __zoom_image(self._images[image_name], self._zoom_level)
     
-    def bilt(
+    def blit(
             self,
             image_name: str,
             position: tuple[int,int],
             orientation: float,
+            alpha: float,
             zoom: bool,
-            alpha: float = 1,
         ):
         """Blit an image on the screen."""
         if zoom:
@@ -50,7 +50,4 @@ class DynamicFrame(Frame):
             self.window.blit(image,(blit_x,blit_y))
         else:
             self.zoom_window.blit(image,(blit_x,blit_y))
-    
-    def get_zoom_level(self):
-        return self._zoom_level
         

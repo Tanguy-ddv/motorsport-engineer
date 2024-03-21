@@ -36,6 +36,22 @@ class Screen:
     def clean(self):
         """Clean the window"""
         self.__window.fill((255,255,255))
+
+    def blit_background_on_frame(self, frame_name, zoom):
+        """Blit the background of the image."""
+        frame = self.__frames[frame_name]
+        if isinstance(frame, DynamicFrame):
+            frame.blit_background(zoom)
+        else:
+            frame.blit_background()
+
+    def blit_on_frame(self, frame_name, image_name, position, orientation: float = None, alpha: float = None, zoom: bool = False):
+        """Blit on image of a frame on the frame."""
+        frame = self.__frames[frame_name]
+        if isinstance(frame, DynamicFrame):
+            frame.blit(image_name, position, orientation, alpha, zoom)
+        else:
+            frame.blit(image_name, position)
     
     def blit_frame(self, name: str, left: int = 0, top: int = 0, focus: tuple[int, int]= None):
         """

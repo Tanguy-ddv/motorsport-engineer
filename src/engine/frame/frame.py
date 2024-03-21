@@ -19,11 +19,11 @@ class Frame:
         """Load an image"""
         self._images[image_name] = im.load(path)
     
-    def bilt_background(self):
+    def blit_background(self):
         """Bilt the background on the window."""
         self.window.blit(self._background, (0,0))
     
-    def bilt(self, image_name: str, position: tuple[int,int]):
+    def blit(self, image_name: str, position: tuple[int,int]):
         """Blit an image on the screen."""
         image = self._images[image_name]
         rect = image.get_rect()
