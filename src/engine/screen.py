@@ -34,9 +34,13 @@ class Screen:
         if name in self.__frames:
             del self.__frames[name]
     
-    def clean(self):
+    def clean_window(self):
         """Clean the window"""
         self.__window.fill((255,255,255))
+    
+    def clear_frames(self):
+        """Remove every frames."""
+        self.__frames.clear()
 
     def blit_background_on_frame(self, frame_name, zoom = False):
         """Blit the background of the image."""
