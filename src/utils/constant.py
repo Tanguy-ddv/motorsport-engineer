@@ -7,10 +7,9 @@ TRAJECTORY_LENGTH = 20000 # [] The number of points in a trajectory.
 
 DISTANCE_DETECTION_START_DRS = 0.03 # [] The distance in proportion of the circuit, between the detection line and the starting line of the DRS.
 
-_BEST_2KM_TIME = 20.0 # [s/2km] The expected time to do 2km at full speed with the best specs.
-_BEST_MAX_VELOCITY = 1/_BEST_2KM_TIME*2000 # [m/s] The max speed of the car with the best specs.
-_BEST_RACE_DURATION = _BEST_2KM_TIME*20 # [s/40km] The expected time
-_ACCELERATION_TIME_CONSTANT = 2 # [s] The time needed to reach 63% of the maximum velocity
+## Geomerty constants
+
+WIDTH, HEIGHT = 1200, 675 # The ratio needs to be 16/9 to fit the screen with black lines.
 
 ## Strategy constants
 
@@ -29,6 +28,11 @@ GRID = 'grid'
 # Physics constants
 
 ## Car physics constants
+
+_BEST_2KM_TIME = 20.0 # [s/2km] The expected time to do 2km at full speed with the best specs.
+_BEST_MAX_VELOCITY = 1/_BEST_2KM_TIME*2000 # [m/s] The max speed of the car with the best specs.
+_BEST_RACE_DURATION = _BEST_2KM_TIME*20 # [s/40km] The expected time
+_ACCELERATION_TIME_CONSTANT = 2 # [s] The time needed to reach 63% of the maximum velocity
 
 ### Tyre
 
