@@ -15,7 +15,7 @@ class Engine:
         self.mixer = Mixer()
         self.input_manager= InputManager()
 
-        self.__wait_time = 1000/fps # [ms] the waiting time at the end of each frame.
+        self.__wait_time = int(1000/fps) # [ms] the waiting time at the end of each frame.
 
     def __del__(self):
         """This function is called when the engine instance is killed."""
@@ -23,8 +23,8 @@ class Engine:
 
     def end_of_loop(self) -> None:
         """Update the screen at the end of the loop"""
-        Screen.update()
-        Mixer.update()
+        self.screen.update()
+        self.mixer.update()
         pygame.time.wait(self.__wait_time)
 
     def user_quit(self) -> bool:

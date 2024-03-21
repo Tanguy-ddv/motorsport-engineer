@@ -12,7 +12,7 @@ class Screen:
     def __init__(self, width, height, caption) -> None:
         self.__window = ds.set_mode((width, height))
         ds.set_caption(caption)
-        self.toggle_fullscreen()
+        #self.toggle_fullscreen()
         self.__frames: dict[str, Frame | DynamicFrame] = {}
 
     def update(self):
