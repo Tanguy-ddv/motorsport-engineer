@@ -3,6 +3,8 @@
 import pygame.display as ds
 from .frame import Frame, DynamicFrame
 from pygame import Rect
+from pygame.font import Font
+
 
 class Screen:
     """The screen is used to display the game content."""
@@ -21,12 +23,12 @@ class Screen:
         """toggle the fullscreen."""
         ds.toggle_fullscreen()
     
-    def add_frame(self, name: str, background_path: str, zoom_level: float = None):
+    def add_frame(self, name: str, background_path: str, font : Font = None, zoom_level: float = None):
         """Add a new frame to the screen."""
         if zoom_level is None:
-            self.__frames[name] = Frame(background_path)
+            self.__frames[name] = Frame(background_path, font)
         else:
-            self.__frames[name] = DynamicFrame(background_path, zoom_level)
+            self.__frames[name] = DynamicFrame(background_path, font, zoom_level)
     
     def remove_frame(self, name: str):
         """Delete a frame from the screen."""
@@ -44,6 +46,11 @@ class Screen:
             frame.blit_background(zoom)
         else:
             frame.blit_background()
+        
+    def write_on_frame(self, frame_name: str, text:str, position: tuple[int, int], antialias: bool, color: tuple[int,int,int]):
+        """Write something on a frame"""
+        frame = self.__frames[frame_name]
+        frame.write(text, position, antialias, color)
 
     def blit_on_frame(self, frame_name, image_name, position, orientation: float = None, alpha: float = None, zoom: bool = False):
         """Blit on image of a frame on the frame."""

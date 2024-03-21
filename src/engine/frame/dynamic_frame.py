@@ -2,6 +2,8 @@
 from pygame import Surface
 import pygame.transform as tf
 from .frame import Frame
+from pygame.font import Font
+
 
 def __zoom_image(image: Surface, zoom_level) -> Surface:
     """Rescale the image by zooming."""
@@ -11,8 +13,8 @@ def __zoom_image(image: Surface, zoom_level) -> Surface:
 class DynamicFrame(Frame):
     """A Frame where we can zoom, put alpha and rotate component."""
 
-    def __init__(self, background_path: str, zoom_level: float):
-        super().__init__(background_path)
+    def __init__(self, background_path: str, font: Font, zoom_level: float):
+        super().__init__(background_path, font)
         self._zoom_level = zoom_level
         self._zoom_background = __zoom_image(self._background, zoom_level)
         self.zoom_window = Surface(self._zoom_background.get_size())
