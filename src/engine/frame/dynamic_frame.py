@@ -4,7 +4,6 @@ import pygame.transform as tf
 import pygame.image as im
 from .frame import Frame
 from pygame.font import Font
-from typing import Literal
 
 
 def __zoom_image(image: Surface, zoom_level) -> Surface:
