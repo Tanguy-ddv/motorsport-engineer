@@ -4,11 +4,24 @@ import socket
 import threading
 import json
 
+class ClientSocket():
+    """
+    This class is used to store the client socked object along with its id.
+
+    Without this class, deconnection of players might create duplicate ids.
+    """
+
+    def __init__(self, client_socket: socket.socket, id_: int):
+        """Create an instance of the clientSocket."""
+        self.socket = client_socket
+        self.id_ = id_
+
+
 class Server:
     def __init__(self, host_ip, host_port):
 
         self.__server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.__client_sockets = []
+        self.__client_sockets: list[ClientSocket] = []
         self.__running = True
         self.__last_received = {}
         self.__is_triggered = False
@@ -20,9 +33,10 @@ class Server:
     def __accept_clients(self):
         while self.__running:
             client_socket, address = self.__server_socket.accept()
-            self.__client_sockets.append(client_socket)
-            print(f"new client connected: {address} has the id {len(self.__client_sockets)}")
-            welcome_message = {"header" : "new_id", "content" : len(self.__client_sockets)}
+            id_ = max(client_socket.id_ for client_socket in self.__client_sockets)
+            self.__client_sockets.append(ClientSocket(client_socket, id_))
+            print(f"new client connected: {address} has the id {id_}")
+            welcome_message = {"header" : "new_id", "content" : id_}
             json_message = json.dumps(welcome_message)
             client_socket.send(json_message.encode())
             threading.Thread(target=self.__handle_client, args=(client_socket,)).start()
@@ -51,22 +65,22 @@ class Server:
 
     def send(self, client_id, data):
         """The data to one client."""
-        if 0 < client_id <= len(self.__client_sockets):
-            client_socket = self.__client_sockets[client_id - 1]
-            json_data = json.dumps(data)
-            client_socket.send(json_data.encode())
+        for client_socket in self.__client_sockets:
+            if client_socket.id_ == client_id:
+                json_data = json.dumps(data)
+                client_socket.socket.send(json_data.encode())
 
     def send_all(self, data):
         """Send data to all the clients."""
         for client_socket in self.__client_sockets:
             json_data = json.dumps(data)
-            client_socket.send(json_data.encode())
+            client_socket.socket.send(json_data.encode())
 
     def stop(self):
         self.__running = False
-        self.__client_sockets.close()
+        self.__server_socket.close()
         for client_socket in self.__client_sockets:
-            client_socket.close()
+            client_socket.socket.close()
 
 if __name__ == '__main__':
     SERVER_IP = '127.0.0.1'
