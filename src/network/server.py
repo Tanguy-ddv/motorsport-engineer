@@ -33,15 +33,18 @@ class Server:
     def __accept_clients(self):
         while self.__running:
             client_socket, address = self.__server_socket.accept()
-            id_ = max(client_socket.id_ for client_socket in self.__client_sockets)
+            if self.__client_sockets:
+                id_ = max(client_socket.id_ for client_socket in self.__client_sockets) +1
+            else:
+                id_ = 1
             self.__client_sockets.append(ClientSocket(client_socket, id_))
             print(f"new client connected: {address} has the id {id_}")
             welcome_message = {"header" : "new_id", "content" : id_}
             json_message = json.dumps(welcome_message)
             client_socket.send(json_message.encode())
-            threading.Thread(target=self.__handle_client, args=(client_socket,)).start()
+            threading.Thread(target=self.__handle_client, args=(client_socket, id_)).start()
 
-    def __handle_client(self, client_socket: socket.socket):
+    def __handle_client(self, client_socket: socket.socket, id_: int):
         while self.__running:
             try:
                 data = client_socket.recv(1024)
@@ -53,8 +56,10 @@ class Server:
                     self.__is_triggered = False
             except Exception as e:
                 print("Error handling client data:", e)
-                self.__client_sockets.remove(client_socket)
-                client_socket.close()
+                for client_sck in self.__client_sockets:
+                    if client_sck.id_ == id_:
+                        self.__client_sockets.remove(client_sck)
+                        client_socket.close()
                 break
     
     def get_last_received(self) -> dict:
