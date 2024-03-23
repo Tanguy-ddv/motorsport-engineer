@@ -1,7 +1,7 @@
 """The chassis of the car allows it to take the turns faster."""
 
 from database import DBManager
-from circuit.weather import Weather
+from race.circuit.weather import Weather
 from utils.maths import affine2
 from race.pawn.car.error import CarError
 from utils.constant import CHASSIS_MIN_PERFO, CHASSIS_MAX_PERFO, CHASSIS_DROP, CHASSIS_PERFO_AT_DROP

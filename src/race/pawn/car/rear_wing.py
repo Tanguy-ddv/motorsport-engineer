@@ -3,7 +3,7 @@
 from database import DBManager
 from utils.maths import affine2
 from utils.constant import REAR_WING_MIN_PERFO, REAR_WING_MAX_PERFO, REAR_WING_DROP, REAR_WING_PERFO_AT_DROP
-from circuit.weather import Weather
+from race.circuit.weather import Weather
 
 class RearWing:
     """The RearWing objects represents the rear wing of the car during the race."""

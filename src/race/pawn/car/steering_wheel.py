@@ -2,7 +2,7 @@
 
 from database import DBManager
 from race.pawn.car.error import CarError
-from circuit.weather import Weather
+from race.circuit.weather import Weather
 
 class SteeringWheel:
     """The SteeringWheel objects represents the deck capacity of the player."""

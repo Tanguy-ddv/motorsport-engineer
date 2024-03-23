@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 from typing import Literal
-from circuit.weather import Weather
+from race.circuit.weather import Weather
 from database import DBManager
 from utils.maths import affine2
 from utils.constant import FPS, PERFO_COEFF_PUNCTURE

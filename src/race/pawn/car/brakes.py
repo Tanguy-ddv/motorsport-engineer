@@ -4,7 +4,7 @@ from database import DBManager
 from utils.maths import affine2
 from utils.constant import BRAKES_DEGRADATION, BRAKES_MAX_PERFO, BRAKES_PERFO_AT_DROP, BRAKES_MIN_PERFO, BRAKES_DROP, FPS
 from race.pawn.car.error import CarError
-from circuit.weather import Weather
+from race.circuit.weather import Weather
 
 class Brakes:
     """The Brakes objects represents the brakes of the car during a race."""

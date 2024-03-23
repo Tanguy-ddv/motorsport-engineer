@@ -1,8 +1,8 @@
 """The pawn is one of the main component of the game. Each player has two pawns. Each pawn is one driver and one car."""
 
-from circuit.weather import Weather
-from pawn.car import Car
-from pawn.driver.driver import Driver
+from race.circuit.weather import Weather
+from race.pawn.car import Car
+from race.pawn.driver.driver import Driver
 from utils.constant import EMPTY_CAR_MASS, FPS, G, MU_C
 
 class Pawn:
