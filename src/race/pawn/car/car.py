@@ -10,7 +10,7 @@ from .steering_wheel import SteeringWheel
 from .brakes import Brakes
 from .fuel_tank import FuelTank
 from .tyres import Tyres
-from circuit.weather import Weather
+from race.circuit.weather import Weather
 from utils.constant import BEST_ENGINE_FORCE, BEST_FLUID_FRICTION_COEFF, BEST_BRAKING_FORCE
 
 class Car:

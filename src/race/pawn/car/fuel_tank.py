@@ -1,7 +1,7 @@
 """The fuel tank of the car store the fuel for the race."""
 
 from utils.constant import FUEL_TANK_MAX_MASS, FUEL_CONSO_PER_SEC, FPS
-from pawn.car.error import CarError
+from race.pawn.car.error import CarError
 from typing import Literal
 
 class FuelTank:

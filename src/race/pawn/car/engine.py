@@ -1,6 +1,6 @@
 """The engine is the part of the car that make it accelerate."""
 
-from circuit.weather import Weather
+from race.circuit.weather import Weather
 from database import DBManager
 from utils.constant import ENGINE_MIN_PERFO, ENGINE_MAX_PERFO, ENGINE_DROP, ENGINE_PERFO_AT_DROP, ENGINE_DEGRADATION, FPS
 from utils.maths import affine2

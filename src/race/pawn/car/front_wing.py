@@ -1,7 +1,7 @@
 """The Front wing is the front of the car."""
 
 from database import DBManager
-from circuit.weather import Weather
+from race.circuit.weather import Weather
 from utils.maths import affine2
 from race.pawn.car.error import CarError
 from utils.constant import FRONT_WING_DROP, FRONT_WING_MAX_PERFO, FRONT_WING_MIN_PERFO, FRONT_WING_PERFO_AT_DROP
