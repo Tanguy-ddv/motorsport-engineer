@@ -37,8 +37,8 @@ class Client:
         self.close()
 
 if __name__ == '__main__':
-    SERVER_IP = '127.0.0.1'
-    SERVER_PORT = 12345
+    SERVER_IP = input("enter the ip address of the server: ")
+    SERVER_PORT = 50505
 
     client = Client(SERVER_IP, SERVER_PORT)
 
