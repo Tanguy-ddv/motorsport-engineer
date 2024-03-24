@@ -20,6 +20,11 @@ class ClientSocketManager():
         self.port = port
 
 class Server:
+    """
+    The server must be unique. It is launched with the server_main function.
+    Every player, i.e. every client, connect to this server. This server receive and
+    transmit the data to the game.
+    """
     def __init__(self, host_ip, host_port):
 
         self.__server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
