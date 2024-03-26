@@ -32,7 +32,7 @@ class Server:
         self.__running = True
         self.__last_received = {}
         self.__is_triggered = False
-        print(f"server launched: {host_ip}, {host_port}")
+        print(f"Server launched: {host_ip}, {host_port}")
         self.__server_socket.bind((host_ip, host_port))
         self.__server_socket.listen(20)
         threading.Thread(target=self.__accept_clients).start()
@@ -46,7 +46,7 @@ class Server:
                 else:
                     id_ = 1
                 self.__client_socket_managers.append(ClientSocketManager(client_socket, id_, address, port))
-                print(f"new client connected: {address} has the id {id_}")
+                print(f"New client connected: {address} has the id {id_}")
             else:
                 for client_socket_m in self.__client_socket_managers:
                     if client_socket_m.address == address:

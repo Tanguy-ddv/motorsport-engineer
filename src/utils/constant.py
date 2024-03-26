@@ -9,7 +9,8 @@ DISTANCE_DETECTION_START_DRS = 0.03 # [] The distance in proportion of the circu
 
 ## Geomerty constants
 
-WIDTH, HEIGHT = 1200, 675 # The ratio needs to be 16/9 to fit the screen with black lines.
+WIDTH, HEIGHT = 1250, 703 # The ratio needs to be 16/9 to fit the screen with black lines.
+CIRCUIT_WIDTH, CIRCUIT_HEIGHT = 1151, 610
 
 ## Strategy constants
 
